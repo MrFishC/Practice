@@ -10,6 +10,7 @@ public class QueueClient {
     public static void main(String[] args){
         MyQueue myQueue = new MyQueue(10);
         try {
+
             myQueue.enQueue(1);
             myQueue.enQueue(2);
             myQueue.enQueue(3);
