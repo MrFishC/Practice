@@ -248,5 +248,5 @@ public interface AidlDemoInterface extends android.os.IInterface
 
 + 参考：《Android开发艺术探索》
 + 附上一张Binder工作机制的图
-+ ![Binder工作机制](./app/src/main/res/mipmap-xxhdpi/binder_work_process.png)
++ ![Binder工作机制](https://github.com/MrFishC/Practice/blob/master/image/01.Binder的工作机制.jpg#pic_center)
 
