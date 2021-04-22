@@ -16,5 +16,4 @@
         android:text="获取结果"
         android:onClick="getNums"/>
 
-
 </LinearLayout>

@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
  */
 public class GetTwoNumbersService extends Service {
 
-    private int mReuslt;
+//    private int mReuslt;
 
     @Nullable
     @Override
@@ -21,23 +21,28 @@ public class GetTwoNumbersService extends Service {
         return mInterface;
     }
 
-    private final AidlDemoInterface.Stub mInterface = new AidlDemoInterface.Stub() {
-        @Override
-        public void basicTypes(int anInt, long aLong, boolean aBoolean, float aFloat, double aDouble, String aString) throws RemoteException {
 
-        }
+    //系统自动生成
+//    private final AidlDemoInterface.Stub mInterface = new AidlDemoInterface.Stub() {
+//        @Override
+//        public void basicTypes(int anInt, long aLong, boolean aBoolean, float aFloat, double aDouble, String aString) throws RemoteException {
+//
+//        }
+//
+//        @Override
+//        public void sendTwoNums(int nums1, int nums2) throws RemoteException {
+//            mReuslt = nums1 + nums2;
+//            System.out.println(" 查看数据 === " + nums1);
+//            System.out.println(" 查看数据 === " + nums2);
+//        }
+//
+//        @Override
+//        public int getTwoNumsResult() throws RemoteException {
+//            return mReuslt;
+//        }
+//    };
 
-        @Override
-        public void sendTwoNums(int nums1, int nums2) throws RemoteException {
-            mReuslt = nums1 + nums2;
-            System.out.println(" 查看数据 === " + nums1);
-            System.out.println(" 查看数据 === " + nums2);
-        }
-
-        @Override
-        public int getTwoNumsResult() throws RemoteException {
-            return mReuslt;
-        }
-    };
+    //测试自定义的aidl文件
+    private CustomImpl mInterface = new CustomImpl();
 
 }
