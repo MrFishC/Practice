@@ -1,3 +1,4 @@
+include ':a04_algorithm'
 include ':aidl02'
 include ':aidl01'
 include ':a03_data_structure'

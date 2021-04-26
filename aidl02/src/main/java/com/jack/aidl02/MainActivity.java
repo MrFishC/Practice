@@ -32,6 +32,11 @@ public class MainActivity extends AppCompatActivity {
             public void onServiceConnected(ComponentName name, IBinder service) {
                 mIsConnect = true;
                 mCustomAidlInterface = CustomImpl.asInterface(service);
+                try {
+                    service.linkToDeath(mDeathRecipient,0);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -45,6 +50,19 @@ public class MainActivity extends AppCompatActivity {
         intent.setAction("com.jack.aidl01");
         bindService(intent, mServiceConnection, BIND_AUTO_CREATE);
     }
+
+    private IBinder.DeathRecipient mDeathRecipient = new IBinder.DeathRecipient() {
+        @Override
+        public void binderDied() {
+            if(mCustomAidlInterface == null){
+                mCustomAidlInterface.asBinder().unlinkToDeath(mDeathRecipient,0);
+                mDeathRecipient = null;
+
+                //重新bindService
+                autoConnectService();
+            }
+        }
+    };
 
     public void sendNums(View view) {
         if(mIsConnect){
