@@ -46,13 +46,14 @@ public class BubblingClient {
         int sortBorder = array.length - 1;
 
         for(int i = 0;i < array.length - 1;i++){
-            boolean isSorted = false;
+            boolean isSorted = true;
             for(int j = 0;j < sortBorder;j++){
                 if(array[j] > array[j + 1]) {
                     int temp = array[j];
                     array[j] = array[j + 1];
                     array[j + 1] = temp;
-                    isSorted = true;
+                    //因为有元素交换，所以不是有序的
+                    isSorted = false;
                     lastExchangeIndex = j;
                 }
             }

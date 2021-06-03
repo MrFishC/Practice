@@ -10,11 +10,68 @@ import java.util.Arrays;
 public class QucikSortClient {
 
     public static void main(String[] arg){
-        int[] array = new int[]{1,3,5,6,2,4,8,9,10};
-        qucikSort(array,0,array.length - 1);
-        System.out.println("排序后的数据 " + Arrays.toString(array));
+//        int[] array = new int[]{1,3,5,6,2,4,8,9,10};
+//        qucikSort(array,0,array.length - 1);
+//        System.out.println("排序后的数据 " + Arrays.toString(array));
+        romanToInt("CDI");
     }
 
+    public static int romanToInt(String s) {
+        if(s.length() == 0){
+            return 0;
+        }
+
+        //CDI
+        int pre = getValue(s.charAt(0));
+        int result = 0;
+        for(int i = 1;i < s.length();i++){
+            int num = getValue(s.charAt(i));
+            System.out.println(" i = " + i + ", num = " + num);
+            if(pre < num){
+                result -= pre;
+                System.out.println(" - result = " + result);
+            }else{
+                result += pre;
+                System.out.println(" + pre = " + pre);
+                System.out.println(" + result = " + result);
+            }
+            pre = num;
+            System.out.println("  pre = " + pre);
+        }
+
+        result += pre;
+        System.out.println("  result = " + result);
+
+        return result;
+    }
+
+    private static int getValue(char c){
+        int i = 0;
+        switch(c){
+            case 'I':
+                i = 1;
+                break;
+            case 'V':
+                i = 5;
+                break;
+            case 'X':
+                i = 10;
+                break;
+            case 'L':
+                i = 50;
+                break;
+            case 'C':
+                i = 100;
+                break;
+            case 'D':
+                i = 500;
+                break;
+            case 'M':
+                i = 1000;
+                break;
+        }
+        return i;
+    }
 
     private static void qucikSort(int[] array,int startIndex,int endIndex) {
         if(startIndex >= endIndex){
