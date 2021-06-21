@@ -1,6 +1,10 @@
 package com.jack.a04_algorithm.a03_quick_sort;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Stack;
+import java.util.logging.Level;
 
 /**
  * @创建者 Jack
@@ -10,10 +14,11 @@ import java.util.Arrays;
 public class QucikSortClient {
 
     public static void main(String[] arg){
-//        int[] array = new int[]{1,3,5,6,2,4,8,9,10};
+        int[] array = new int[]{1,3,5,6,2,4,8,9,7,10};
 //        qucikSort(array,0,array.length - 1);
-//        System.out.println("排序后的数据 " + Arrays.toString(array));
-        romanToInt("CDI");
+        qucikSort1(array,0,array.length - 1);
+        System.out.println("排序后的数据 " + Arrays.toString(array));
+//        romanToInt("CDI");
     }
 
     public static int romanToInt(String s) {
@@ -79,7 +84,9 @@ public class QucikSortClient {
         }
 
 //        int pivotIndex = partition(array,startIndex,endIndex);
-        int pivotIndex = partition1(array,startIndex,endIndex);
+//        int pivotIndex = partition1(array,startIndex,endIndex);
+//        int pivotIndex = partition2(array,startIndex,endIndex);
+        int pivotIndex = partition3(array,startIndex,endIndex);
 
         qucikSort(array,startIndex,pivotIndex - 1);
         qucikSort(array,pivotIndex + 1,endIndex);
@@ -140,6 +147,104 @@ public class QucikSortClient {
         array[startIndex] = array[mark];
         array[mark] = pivot;
         return mark;
+    }
+
+
+    //复习：练习快排的双边循环法，基准元素默认选择第一个
+    private static int partition2(int[] array, int startIndex, int endIndex){
+        //基准元素
+        int pivot = array[startIndex];
+
+        int left = startIndex;
+        int right = endIndex;
+
+        while(left != right){       //这里的条件是 !=
+
+            while(left < right && array[right] > pivot){
+                right--;
+            }
+
+            while(left < right && array[left] < pivot){
+                left++;
+            }
+
+            if(left < right){
+                int temp = array[left];
+                array[left] = array[right];
+                array[right] = temp;
+            }
+        }
+
+        //pivot和指针重合点进行交换
+        array[startIndex] = array[left];    //或 array[startIndex] = array[right];
+        array[left] = pivot;
+        return left;
+    }
+
+    //复习：单边循环法
+    private static int partition3(int[] array, int startIndex, int endIndex){
+        //关键点 基准元素和mark
+        int pivot = array[startIndex];
+        int mark = startIndex;
+
+        //for循环
+        for (int i = startIndex + 1; i <= endIndex; i++) {       // i <= endIndex
+            if(array[i] < pivot){           //改层控制条件很重要
+                mark++;
+                int p = array[mark];
+                array[mark] = array[i];
+                array[i] = p;
+            }
+        }
+
+        //交换mark位置元素和pivot
+        array[startIndex] = array[mark];
+        array[mark] = pivot;
+        return mark;
+    }
+
+    //复习：快排的非递归实现
+    private static void qucikSort1(int[] array,int startIndex,int endIndex){
+
+        //定义集合栈 来 代替 递归栈
+        Stack<Map<String,Integer>> stack = new Stack<>();
+
+        //存储下标
+        Map<String,Integer> map = new HashMap<>();
+        map.put("startIndex",startIndex);
+        map.put("endIndex",endIndex);
+
+        stack.push(map);
+
+        //开始循环
+        //循环结束条件
+        while(!stack.isEmpty()){
+            //栈顶元素出栈
+            Map<String,Integer> indexParams = stack.pop();
+
+            //获取startIndex和endIndex
+            int startParam = indexParams.get("startIndex");
+            int endParam = indexParams.get("endIndex");
+
+            //得到基准元素
+            int pivot = partition3(array,startParam,endParam);
+
+            if(startParam < pivot - 1){
+                Map<String,Integer> map1 = new HashMap<>();
+                map1.put("startIndex",startIndex);
+                map1.put("endIndex",pivot - 1);
+                stack.push(map1);
+            }
+
+            if(endParam > pivot + 1){
+                Map<String,Integer> map2 = new HashMap<>();
+                map2.put("startIndex",pivot + 1);
+                map2.put("endIndex",endParam);
+                stack.push(map2);
+            }
+
+        }
+
     }
 
 }

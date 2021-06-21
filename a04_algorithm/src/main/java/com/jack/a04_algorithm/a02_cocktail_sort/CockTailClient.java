@@ -16,11 +16,13 @@ public class CockTailClient {
         int[] array = new int[]{1,3,5,6,2,4,8,9,7,10};
         int[] array1 = new int[]{10,7,2,5,1,4,3,8,6,9};
         int[] array2 = new int[]{4,8,9,10,1,3,5,6,2,7};
-        cockTailSort(array);
-        cockTailSort(array1);
-        cockTailSort(array2);
-        System.out.println("排序后的数据  " + Arrays.toString(array));
-        System.out.println("排序后的数据1 " + Arrays.toString(array1));
+//        cockTailSort(array);
+//        cockTailSort(array1);
+//        cockTailSort(array2);
+        cockTailSort1(array2);
+//        System.out.println("排序后的数据  " + Arrays.toString(array));
+//        System.out.println("排序后的数据1 " + Arrays.toString(array1));
+//        System.out.println("排序后的数据2 " + Arrays.toString(array2));
         System.out.println("排序后的数据2 " + Arrays.toString(array2));
     }
 
@@ -80,6 +82,66 @@ public class CockTailClient {
             leftSortBorder = lastExchangeIndex;
 
             System.out.println(" leftSortBorder  = " + leftSortBorder + " ,rightSortBorder = " + rightSortBorder);
+
+            if(isSort){
+                break;
+            }
+
+        }
+
+    }
+
+    //复习鸡尾酒排序
+    //总结：鸡尾酒排序还是不够熟练，练习+1
+    private static void cockTailSort1(int[] array){
+
+        //同冒泡排序一样，外层循环控制回合次数,但是鸡尾酒排序的外层循环回合次数相对冒泡排序减少了一半
+
+        //优化2：
+        int leftSortBorder = 0;
+        int rightSortBorder = array.length - 1;
+        int lastChangeIndex = 0;
+
+        for (int i = 0; i < array.length/2; i++) {
+
+            //优化1：
+            boolean isSort = true;
+
+            //内存循环 使用了两次for循环
+
+            //第一个for循环，将最大值放置在最右侧
+//            for (int j = i; j < array.length - i - 1; j++) {
+            for (int j = i; j < rightSortBorder; j++) {
+                if(array[j] > array[j + 1]){
+                    int p = array[j + 1];
+                    array[j + 1] = array[j];
+                    array[j] = p;
+                    isSort = false;
+                    lastChangeIndex = j;
+                }
+            }
+
+            rightSortBorder = lastChangeIndex;
+
+            if(isSort){
+                break;
+            }
+
+            isSort = true;
+
+            //第二个for循环，将最小值放置在最左侧
+//            for (int j = array.length - i - 1; j > i; j--) {
+            for (int j = array.length - i - 1; j > leftSortBorder; j--) {
+                if(array[j] < array[j - 1]){
+                    int p = array[j - 1];
+                    array[j - 1] = array[j];
+                    array[j] = p;
+                    isSort = false;
+                    lastChangeIndex = j;
+                }
+            }
+
+            leftSortBorder = lastChangeIndex;
 
             if(isSort){
                 break;
