@@ -5,7 +5,9 @@ import java.util.Arrays;
 /**
  * @创建者 Jack
  * @创建时间 2021/5/31 11:29
- * @描述
+ * @描述 《漫画算法》果然了不起
+ *
+ * 经典至极
  */
 public class HeapSortClient {
     public static void main(String[] arg){
@@ -25,10 +27,12 @@ public class HeapSortClient {
         System.out.println("-------最大堆构建完毕-------");
         System.out.println(Arrays.toString(array));
 
+        System.out.println("-------开始排序-------");
         for (int i = array.length - 1; i > 0 ; i--) {
             int temp = array[i];
             array[i] = array[0];
             array[0] = temp;
+            //分析一下i = array.length - 1的情况
             downAdjust(array,0,i);
         }
 
@@ -54,7 +58,7 @@ public class HeapSortClient {
             //同时，重新计算parentIndex和childIndex变量
             array[parentIndex] = array[childIndex];
             parentIndex = childIndex;
-            childIndex = 2 * childIndex + 1;
+            childIndex = 2 * childIndex + 1;        //parentIndex左孩子的索引
             //继续下一轮循环
         }
 
