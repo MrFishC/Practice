@@ -1,3 +1,4 @@
+include ':a05_java_demo'
 include ':firstlinecoding08'
 include ':firstlinecoding07'
 include ':firstlinecoding06'

@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="1.8" />
+    <bytecodeTargetLevel target="1.7">
+      <module name="Practice.a01_design_pattern" target="1.8" />
+      <module name="Practice.a02_serializable_demo" target="1.8" />
+      <module name="Practice.a03_data_structure" target="1.8" />
+      <module name="Practice.a04_algorithm" target="1.8" />
+      <module name="Practice.aidl01" target="1.8" />
+      <module name="Practice.aidl02" target="1.8" />
+      <module name="Practice.app" target="1.8" />
+      <module name="Practice.firstlinecoding06" target="1.8" />
+      <module name="Practice.firstlinecoding07" target="1.8" />
+      <module name="Practice.firstlinecoding08" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
